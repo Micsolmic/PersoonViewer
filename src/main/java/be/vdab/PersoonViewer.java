@@ -2,13 +2,34 @@ package be.vdab;
 
 import java.util.List;
 
+import be.vdab.services.PersoonService;
+
 public class PersoonViewer {
 
 	PersoonEigenschap[] eigenschappen;
+	PersoonService persoonService;
 	
-	public PersoonViewer(PersoonEigenschap[] eigenschappen) {		
-		this.eigenschappen = eigenschappen;		
+	public PersoonEigenschap[] getEigenschappen() {
+		return eigenschappen;
 	}
+
+	public PersoonService getPersoonService() {
+		return persoonService;
+	}
+
+	public void setEigenschappen(PersoonEigenschap[] eigenschappen) {
+		this.eigenschappen = eigenschappen;
+	}
+
+	public void setPersoonService(PersoonService persoonService) {
+		this.persoonService = persoonService;
+	}
+
+	
+	
+	
+	
+	
 	
 	public void afbeelden(List<Persoon> personen) {
 		

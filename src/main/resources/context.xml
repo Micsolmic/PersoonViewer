@@ -2,14 +2,27 @@
 <beans xmlns='http://www.springframework.org/schema/beans'
 	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
 	xsi:schemaLocation='http://www.springframework.org/schema/beans   http://www.springframework.org/schema/beans/spring-beans.xsd'>
-	<bean id='persoonViewer' class='be.vdab.PersoonViewer'>	
-	<constructor-arg>
-	<set>
-	<value>PERSOON_NR</value>
-	<value>VOORNAAM</value>
-
-	</set>
-	</constructor-arg>
+	<bean id='persoonViewer' class='be.vdab.PersoonViewer'>
+		<property name='eigenschappen'>
+			<set>
+				<value>PERSOON_NR</value>
+				<value>VOORNAAM</value>
+			</set>
+		</property>
+		<property name='persoonService' ref='persoonServiceImpl'/>
+	</bean>
 	
-	</bean> 
+	<bean id='persoonRepositoryCSV' class='be.vdab.repositories.PersoonRepositoryCSV'>
+		<constructor-arg value='C:/Users/Admin/Desktop/personen.csv'/>	
+	</bean>
+	<bean id='persoonRepositoryMeerdereRegels' class='be.vdab.repositories.PersoonRepositoryMeerdereRegels'>
+		<constructor-arg>
+			<value>C:/Users/Admin/Desktop/personen.txt
+			</value>
+		</constructor-arg>
+	</bean>
+	<bean id='persoonServiceImpl' class='be.vdab.services.PersoonServiceImpl'>
+		<constructor-arg ref='persoonRepositoryCSV' />
+	</bean>
+
 </beans>
