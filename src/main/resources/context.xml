@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns='http://www.springframework.org/schema/beans'
-	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
-	xsi:schemaLocation='http://www.springframework.org/schema/beans   http://www.springframework.org/schema/beans/spring-beans.xsd'>
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' 
+	xmlns:context='http://www.springframework.org/schema/context'
+	xsi:schemaLocation='http://www.springframework.org/schema/beans 
+	 http://www.springframework.org/schema/beans/spring-beans.xsd
+	   http://www.springframework.org/schema/context
+	  http://www.springframework.org/schema/context/spring-context.xsd'>
+
+
+
+
 	<bean id='persoonViewer' class='be.vdab.PersoonViewer'>
 		<property name='eigenschappen'>
 			<set>
@@ -9,17 +17,18 @@
 				<value>VOORNAAM</value>
 			</set>
 		</property>
-		<property name='persoonService' ref='persoonServiceImpl'/>
+		<property name='persoonService' ref='persoonServiceImpl' />
 	</bean>
-	
+
+	<context:property-placeholder location='classpath:persoonrepos.properties' />
+
 	<bean id='persoonRepositoryCSV' class='be.vdab.repositories.PersoonRepositoryCSV'>
-		<constructor-arg value='C:/Users/Admin/Desktop/personen.csv'/>	
+		<constructor-arg value='${persoonCSV}' />
 	</bean>
 	<bean id='persoonRepositoryMeerdereRegels' class='be.vdab.repositories.PersoonRepositoryMeerdereRegels'>
-		<constructor-arg>
-			<value>C:/Users/Admin/Desktop/personen.txt
-			</value>
-		</constructor-arg>
+		<constructor-arg value='${persoonTXT}' />
+
+
 	</bean>
 	<bean id='persoonServiceImpl' class='be.vdab.services.PersoonServiceImpl'>
 		<constructor-arg ref='persoonRepositoryCSV' />
